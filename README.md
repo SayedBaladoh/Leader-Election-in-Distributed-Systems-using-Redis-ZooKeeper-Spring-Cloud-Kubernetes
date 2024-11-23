@@ -1,7 +1,6 @@
 # Leader Election in Distributed Systems
 
-An implementation of the Leader Election pattern for electing a leader in a multi-node cluster (distributed system) for ensuring only one instance (the Leader) will process the work (maybe the scheduled task or maybe
-coordination between different services etc.)
+An implementation of the Leader Election pattern with different approaches (Redis, ZooKeeper, Spring Cloud Kubernetes) for electing a leader in a multi-node cluster (distributed system) for ensuring only one instance (the Leader) will process the work (maybe the scheduled task or maybe coordination between different services etc.)
 
 ---
 

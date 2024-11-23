@@ -69,7 +69,7 @@ This project is created using the following technologies:
 ### **Clone the Repository**
 
 ```bash
-git clone https://github.com/SayedBaladoh/Leader-Election-in-Distributed-Systems.git
+git clone https://github.com/SayedBaladoh/Leader-Election-in-Distributed-Systems-using-Redis-ZooKeeper-Spring-Cloud-Kubernetes.git
 cd Leader-Election-in-Distributed-Systems
 cd leader-election-in-distributed-system-redis
 ```
