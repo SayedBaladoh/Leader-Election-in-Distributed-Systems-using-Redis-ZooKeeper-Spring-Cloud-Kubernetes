@@ -121,7 +121,7 @@ java -jar target/leader-election-in-distributed-systems-1.0.0.jar --server.port=
 
 Check the logs.
 
-try to stop the leader instance.
+Try to stop the leader instance and check logs for other instance.
 
 ---
 

@@ -34,7 +34,7 @@ Implementing leader election can be done using different approaches:
 
 ### Implemented Solution
 
-We implemented the differnt approaches in a seprate project.
+The implementation for the different approaches done in a separate project.
 
 - [Leader Election in Distributed Systems using **Redis**](./leader-election-in-distributed-system-redis)
 
