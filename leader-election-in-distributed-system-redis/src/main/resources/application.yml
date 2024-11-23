@@ -1,0 +1,15 @@
+server:
+  port : 8081
+
+spring:
+  application:
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: ${SPRING_REDIS_PORT:6379}
+
+scheduler:
+  cycle-time-in-minutes: ${CYCLE_TIME_IN_MINUTES:10}
