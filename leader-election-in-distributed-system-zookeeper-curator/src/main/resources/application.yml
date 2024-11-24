@@ -1,0 +1,14 @@
+server:
+  port : 8081
+
+spring:
+  application:
+    name: "@project.name@"
+    description: "@project.description@"
+    version: "@project.version@"
+
+zookeeper:
+  connect-string: ${ZOOKEEPER_HOST:localhost}:${ZOOKEEPER_PORT:2181}
+
+scheduler:
+  cycle-time-in-minutes: ${CYCLE_TIME_IN_MINUTES:1}
