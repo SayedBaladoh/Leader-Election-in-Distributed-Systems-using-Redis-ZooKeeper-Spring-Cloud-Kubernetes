@@ -127,7 +127,7 @@ Observe logs:
 - One instance will log `Became the leader!` and periodically run the scheduled task.
 - Other instances will log `Current instance is not the leader. Skipping scheduled task.`.
 - Stop the leader instance.
-- Another instance will log `This instance ($node) is the leader.`. and take over the task.
+- Another instance will log `Became the leader!`. and take over the task.
 
 ---
 
