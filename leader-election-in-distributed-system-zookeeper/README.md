@@ -1,6 +1,6 @@
-# Leader Election in Distributed Systems using Redis
+# Leader Election in Distributed Systems using ZooKeeper
 
-A simple implementation of the Leader Election pattern using Redis for electing a leader in a multi-node cluster (distributed system) for ensuring only one instance (the Leader) will process the work (maybe the scheduled task or maybe
+A simple implementation of the Leader Election pattern using ZooKeeper for electing a leader in a multi-node cluster (distributed system) for ensuring only one instance (the Leader) will process the work (maybe the scheduled task or maybe
 coordination between different services etc.)
 
 ---
@@ -39,7 +39,9 @@ Implementing leader election can be done using different approaches:
 
 ### Implemented Solution
 
-In this project we will implement leader election using **Redis**.
+In this project we will implement leader election using **ZooKeeper** with **native Zookeeper's Java API**.
+
+Apache Zookeeper is an open-source coordination and synchronization service used primarily in distributed systems. It offers a reliable, highly available method for synchronizing tasks and simplifies the leader election process, ensuring high availability, fault tolerance, and data consistency.
 
 ---
 
@@ -49,10 +51,8 @@ This project is created using the following technologies:
 
 1. Java 21
 2. Maven Dependency Management
-3. Spring Boot:
-    - Spring Web
-    - Spring Data Redis
-4. Redis
+3. Spring Boot
+4. ZooKeeper
 5. Lombok
 
 ---
@@ -61,6 +61,7 @@ This project is created using the following technologies:
 
 - [Java 21](https://jdk.java.net/21/)
 - [Maven](https://maven.apache.org/install.html)
+- [Zookeeper](https://zookeeper.apache.org/doc/r3.1.2/zookeeperStarted.html)
 
 ---
 
@@ -71,36 +72,35 @@ This project is created using the following technologies:
 ```bash
 git clone https://github.com/SayedBaladoh/Leader-Election-in-Distributed-Systems-using-Redis-ZooKeeper-Spring-Cloud-Kubernetes.git
 cd Leader-Election-in-Distributed-Systems
-cd leader-election-in-distributed-system-redis
+cd leader-election-in-distributed-system-zookeeper
 ```
 
 ### **Running Locally**
 
-#### 1. **Start Redis Locally**
-Start Redis server
+#### 1. **Start ZooKeeper Locally**
+Start ZooKeeper server
 
 You can use docker
 ```shell
-docker run --name my-redis -p 6379:6379 -d redis
+docker run -p 2181:2181 --name zookeeper --restart always -d zookeeper
+
 ```
 #### 2. **Update Application Configuration**
 
 The application is configured via `application.yml`:
 
 ```yaml
-spring:
-  data:
-    redis:
-      host: ${SPRING_REDIS_HOST:localhost}
-      port: ${SPRING_REDIS_PORT:6379}
+zookeeper:
+  connect-string: ${ZOOKEEPER_HOST:localhost}:${ZOOKEEPER_PORT:2181}
+
 scheduler:
   cycle-time-in-minutes: ${CYCLE_TIME_IN_MINUTES:10}
 ```
 
 ##### Environment Variables
 
-- `SPRING_REDIS_HOST`: Redis hostname (default: `localhost`).
-- `SPRING_REDIS_PORT`: Redis port (default: `6379`).
+- `ZOOKEEPER_HOST`: ZooKeeper hostname (default: `localhost`).
+- `ZOOKEEPER_PORT`: ZooKeeper port (default: `2181`).
 - `CYCLE_TIME_IN_MINUTES`: Scheduler cycle time in minutes (default: `10`).
 
 #### 3. **Build and Run**
@@ -109,7 +109,7 @@ scheduler:
 mvn clean package
 ```
 
-Run **multi instance** of the application locally with different port,
+Start **multi instance** of the application locally with different port,
 in different terminals run:
 
 ```shell
@@ -121,10 +121,10 @@ java -jar target/leader-election-in-distributed-systems-1.0.0.jar --server.port=
 ```
 
 Observe logs:
-- One instance will log `Is instance-$id became a leader: true.` and periodically run the scheduled task.
+- One instance will log `This instance ($node) is the leader.` and periodically run the scheduled task.
 - Other instances will log `Current instance is not the leader. Skipping scheduled task.`.
 - Stop the leader instance.
-- Another instance will log `Is instance-$id became a leader: true.`. and take over the task.
+- Another instance will log `This instance ($node) is the leader.`. and take over the task.
 
 ---
 
