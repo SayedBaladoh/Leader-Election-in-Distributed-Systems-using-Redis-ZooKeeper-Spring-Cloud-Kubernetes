@@ -42,7 +42,7 @@ The implementation for the different approaches done in a separate project.
 
 - for Leader Election implementation with **Spring Cloud Kubernetes** please check:
 [Using Leader Election with Spring Cloud Kubernetes and Spring Scheduler](https://medium.com/@pedrommj8/using-leader-election-with-spring-cloud-kubernetes-and-spring-scheduler-8f7ea3e3e694)
-[github](https://github.com/Jpmmdf/leader-election-spring)
+and code at [github](https://github.com/Jpmmdf/leader-election-spring)
 ---
 
 ## References
